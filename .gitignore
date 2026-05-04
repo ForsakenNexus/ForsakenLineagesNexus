@@ -1,0 +1,6 @@
+node_modules/
+data/nexusDB.json
+logs/
+*.log
+.env
+.DS_Store
