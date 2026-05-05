@@ -1,13 +1,29 @@
+const raceAspectMap = {
+    Sanguivar: "blood",
+    Valgryn:   "lunae",
+    Hexari:    "anima",
+    Feyrin:    "viridia",
+    Draevor:   "quintessence"
+};
+
 const defaultStats = {
-    Sanguivar: { blood: 100, strength: 70, magic: 60, age: 0 },
-    Valgryn:   { lunae: 100, strength: 85, magic: 40, age: 0 },
-    Hexari:    { anima: 100, strength: 50, magic: 90, age: 0 },
-    Feyrin:    { viridia: 100, strength: 55, magic: 80, age: 0 },
-    Draevor:   { quintessence: 100, strength: 75, magic: 75, age: 0 }
+    Sanguivar: { blood: 10, strength: 70, magic: 60, currentNights: 1 },
+    Valgryn:   { lunae: 10, strength: 85, magic: 40, currentNights: 1 },
+    Hexari:    { anima: 10, strength: 50, magic: 90, currentNights: 1 },
+    Feyrin:    { viridia: 10, strength: 55, magic: 80, currentNights: 1 },
+    Draevor:   { quintessence: 10, strength: 75, magic: 75, currentNights: 1 }
 };
 
 function getRaceDefaults(race) {
     return JSON.parse(JSON.stringify(defaultStats[race] || defaultStats.Sanguivar));
 }
 
-module.exports = { getRaceDefaults };
+function getAspectKey(race) {
+    return raceAspectMap[race] || "blood"; // fallback
+}
+
+module.exports = { 
+    getRaceDefaults, 
+    getAspectKey,
+    raceAspectMap 
+};
