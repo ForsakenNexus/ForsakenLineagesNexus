@@ -1,0 +1,141 @@
+{
+  "systemName": "Forsaken Lineages",
+  "maxNights": 999999,
+  "ages": [
+    {
+      "age": 1,
+      "minNights": 1,
+      "maxNights": 25,
+      "name": "Awakening",
+      "maxAspect": 10,
+      "dailyToll": 4.0,
+      "blurb": "You are Awakening to your new Existence"
+    },
+    {
+      "age": 2,
+      "minNights": 26,
+      "maxNights": 150,
+      "name": "Awakened",
+      "maxAspect": 18,
+      "dailyToll": 3.5,
+      "blurb": "Awareness floods in. You are truly Awakened, no longer able to deny what you are"
+    },
+    {
+      "age": 3,
+      "minNights": 151,
+      "maxNights": 500,
+      "name": "Emergent",
+      "maxAspect": 28,
+      "dailyToll": 3.0,
+      "blurb": "The first fragile threads of your true nature begin to uncoil"
+    },
+    {
+      "age": 4,
+      "minNights": 501,
+      "maxNights": 1000,
+      "name": "Echoed",
+      "maxAspect": 42,
+      "dailyToll": 2.5,
+      "blurb": "You are beginning to hear the Echo"
+    },
+    {
+      "age": 5,
+      "minNights": 1001,
+      "maxNights": 1700,
+      "name": "Shadowed",
+      "maxAspect": 60,
+      "dailyToll": 2.0,
+      "blurb": "You are becoming more shadow than flesh, the mortal self dissolving"
+    },
+    {
+      "age": 6,
+      "minNights": 1701,
+      "maxNights": 2600,
+      "name": "Aspectus",
+      "maxAspect": 85,
+      "dailyToll": 1.5,
+      "blurb": "The essence of your Aspect now pulses through every drop of your being"
+    },
+    {
+      "age": 7,
+      "minNights": 2601,
+      "maxNights": 3800,
+      "name": "Eclipsed",
+      "maxAspect": 115,
+      "dailyToll": 1.0,
+      "blurb": "The last light of your human life is eclipsed forever"
+    },
+    {
+      "age": 8,
+      "minNights": 3801,
+      "maxNights": 5500,
+      "name": "Forsaken",
+      "maxAspect": 155,
+      "dailyToll": 0.5,
+      "blurb": "The mortal world has cast you out. You are truly Forsaken now"
+    },
+    {
+      "age": 9,
+      "minNights": 5501,
+      "maxNights": 7600,
+      "name": "Voidtouched",
+      "maxAspect": 280,
+      "dailyToll": 15,
+      "blurb": "The void has reached out and you have felt its touch"
+    },
+    {
+      "age": 10,
+      "minNights": 7601,
+      "maxNights": 10100,
+      "name": "Voidwalker",
+      "maxAspect": 380,
+      "dailyToll": 26,
+      "blurb": "You have started to walk between this world and the void"
+    },
+    {
+      "age": 11,
+      "minNights": 10101,
+      "maxNights": 13000,
+      "name": "Abyssian",
+      "maxAspect": 520,
+      "dailyToll": 42,
+      "blurb": "You descend into the true heart of the Void. Its eternal dark now claims you."
+    },
+    {
+      "age": 12,
+      "minNights": 13001,
+      "maxNights": 16300,
+      "name": "Aetherian",
+      "maxAspect": 700,
+      "dailyToll": 65,
+      "blurb": "The Darkness could not claim you. You rise, transformed, into a higher state of existence"
+    },
+    {
+      "age": 13,
+      "minNights": 16301,
+      "maxNights": 20000,
+      "name": "Eternitus",
+      "maxAspect": 920,
+      "dailyToll": 95,
+      "blurb": "You are now Eternal, you will never cease"
+    },
+    {
+      "age": 14,
+      "minNights": 20001,
+      "maxNights": 29999,
+      "name": "Aspect of the Echo",
+      "maxAspect": 1200,
+      "dailyToll": 140,
+      "blurb": "You have transcended beyond limits and are now a true aspect of the First Echo"
+    },
+    {
+      "age": 15,
+      "minNights": 30000,
+      "maxNights": 999999,
+      "name": "One with the Spark",
+      "maxAspect": 1500,
+      "dailyToll": 0,
+      "blurb": "You have reached the apex of all, Your existence and that of the Voidspark are now intertwined"
+    }
+  ]
+}
