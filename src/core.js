@@ -6,7 +6,7 @@ const database = require('./database');
 const races = require('./races');
 const mechanics = require('./mechanics');
 const utils = require('./utils');
-const ages = require('./data/ageshelper');
+const ages = require('../data/ageshelper');
 
 const app = express();
 app.use(express.json());

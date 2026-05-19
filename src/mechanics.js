@@ -1,4 +1,4 @@
-const ages = require('./data/ageshelper');
+const ages = require('../data/ageshelper');
 const races = require('./races');
 
 // Process feeding for any race
