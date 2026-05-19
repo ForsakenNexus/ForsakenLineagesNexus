@@ -6,7 +6,7 @@ const database = require('./database');
 const races = require('./races');
 const mechanics = require('./mechanics');
 const utils = require('./utils');
-const ages = require('./data/ageshelper');   // ← New age system
+const ages = require('./data/ageshelper');
 
 const app = express();
 app.use(express.json());
@@ -31,7 +31,7 @@ app.post('/nexus', function(req, res) {
             ageName: ages.getAgeName(nights),
             maxAspect: ages.getMaxAspect(nights),
             dailyToll: ages.getDailyToll(nights),
-            resource: data.resource,           // Current Aspect amount
+            resource: data.resource,
             stats: data.stats,
             inventory: data.inventory || [],
             lastUpdated: utils.generateTimestamp()
@@ -61,6 +61,21 @@ app.post('/nexus', function(req, res) {
             });
         }
     } 
+    else if (data.action === "feed") {
+        // New feeding endpoint
+        const nights = parseInt(data.currentNights) || 1;
+        const currentResource = parseFloat(data.resource) || 0;
+        const amount = parseFloat(data.amount) || 0;
+        
+        const newResource = mechanics.processFeeding(data.race, currentResource, amount, nights);
+        
+        res.json({
+            status: "OK",
+            newResource: newResource,
+            maxAspect: ages.getMaxAspect(nights),
+            ageName: ages.getAgeName(nights)
+        });
+    }
     else {
         res.json({status: "ERROR", message: "Unknown action"});
     }
