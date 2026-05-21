@@ -40,11 +40,21 @@ app.post('/nexus', function(req, res) {
         database.saveDB(db);
         res.json({status: "OK", message: "Soul bound to the Nexus"});
     } 
-    else if (data.action === "load") {
+    else if (data.action === "load" || data.action === "scan") {
         const record = db[data.race] && db[data.race][data.key];
         
         if (record) {
-            res.json(record);
+            res.json({
+                status: "OK",
+                currentNights: record.currentNights,
+                ageName: record.ageName,
+                maxAspect: record.maxAspect,
+                dailyToll: record.dailyToll,
+                resource: record.resource,
+                stats: record.stats,
+                inventory: record.inventory,
+                blurb: ages.getBlurb(record.currentNights)
+            });
         } else {
             // New player
             const defaults = races.getRaceDefaults(data.race);
@@ -62,7 +72,6 @@ app.post('/nexus', function(req, res) {
         }
     } 
     else if (data.action === "feed") {
-        // New feeding endpoint
         const nights = parseInt(data.currentNights) || 1;
         const currentResource = parseFloat(data.resource) || 0;
         const amount = parseFloat(data.amount) || 0;
@@ -75,7 +84,7 @@ app.post('/nexus', function(req, res) {
             maxAspect: ages.getMaxAspect(nights),
             ageName: ages.getAgeName(nights)
         });
-    }
+    } 
     else {
         res.json({status: "ERROR", message: "Unknown action"});
     }
