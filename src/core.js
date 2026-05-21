@@ -7,12 +7,13 @@ const races = require('./races');
 const mechanics = require('./mechanics');
 const utils = require('./utils');
 const ages = require('../data/ageshelper');
+const selfscan = require('./selfscan');   // ← New standalone scan
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.post('/nexus', function(req, res) {
+app.post('/nexus', async function(req, res) {
     const data = req.body;
     let db = database.loadDB();
     
@@ -20,62 +21,24 @@ app.post('/nexus', function(req, res) {
         res.json({status: "ERROR", message: "Unknown Aspect"});
         return;
     }
-    
-    if (!db[data.race]) db[data.race] = {};
-    
-    if (data.action === "save") {
+
+    if (data.action === "scan") {
+        const result = await scan.handleScan(data);
+        res.json(result);
+    }
+    else if (data.action === "save") {
+        // your existing save code here...
         const nights = parseInt(data.currentNights) || 1;
-        
-        db[data.race][data.key] = {
-            currentNights: nights,
-            ageName: ages.getAgeName(nights),
-            maxAspect: ages.getMaxAspect(nights),
-            dailyToll: ages.getDailyToll(nights),
-            resource: data.resource,
-            stats: data.stats,
-            inventory: data.inventory || [],
-            lastUpdated: utils.generateTimestamp()
-        };
-        
+        db[data.race][data.key] = { /* ... */ };
         database.saveDB(db);
         res.json({status: "OK", message: "Soul bound to the Nexus"});
     } 
     else if (data.action === "load") {
-        const record = db[data.race] && db[data.race][data.key];
-        
-        if (record) {
-            res.json(record);
-        } else {
-            // New player
-            const defaults = races.getRaceDefaults(data.race);
-            const nights = 1;
-            
-            res.json({
-                status: "NEW",
-                defaults: defaults,
-                currentNights: nights,
-                ageName: ages.getAgeName(nights),
-                maxAspect: ages.getMaxAspect(nights),
-                dailyToll: ages.getDailyToll(nights),
-                blurb: ages.getBlurb(nights)
-            });
-        }
+        // your existing load code...
     } 
     else if (data.action === "feed") {
-        // New feeding endpoint
-        const nights = parseInt(data.currentNights) || 1;
-        const currentResource = parseFloat(data.resource) || 0;
-        const amount = parseFloat(data.amount) || 0;
-        
-        const newResource = mechanics.processFeeding(data.race, currentResource, amount, nights);
-        
-        res.json({
-            status: "OK",
-            newResource: newResource,
-            maxAspect: ages.getMaxAspect(nights),
-            ageName: ages.getAgeName(nights)
-        });
-    }
+        // your existing feed code...
+    } 
     else {
         res.json({status: "ERROR", message: "Unknown action"});
     }
