@@ -22,10 +22,10 @@ app.post('/nexus', function(req, res) {
     }
     
     if (!db[data.race]) db[data.race] = {};
-    
+
     if (data.action === "save") {
+        // ... your existing save code (unchanged)
         const nights = parseInt(data.currentNights) || 1;
-        
         db[data.race][data.key] = {
             currentNights: nights,
             ageName: ages.getAgeName(nights),
@@ -36,7 +36,6 @@ app.post('/nexus', function(req, res) {
             inventory: data.inventory || [],
             lastUpdated: utils.generateTimestamp()
         };
-        
         database.saveDB(db);
         res.json({status: "OK", message: "Soul bound to the Nexus"});
     } 
@@ -46,36 +45,39 @@ app.post('/nexus', function(req, res) {
         if (record) {
             res.json({
                 status: "OK",
+                displayName: llKey2Name ? "Player Name" : "Unknown", // We can enhance this later
+                uuid: data.key,
                 currentNights: record.currentNights,
                 ageName: record.ageName,
+                ageBlurb: ages.getBlurb(record.currentNights),
+                resource: record.resource,
                 maxAspect: record.maxAspect,
                 dailyToll: record.dailyToll,
-                resource: record.resource,
-                stats: record.stats,
-                inventory: record.inventory,
-                blurb: ages.getBlurb(record.currentNights)
+                // Add more fields here as we expand (BloodLine, Clan, House, etc.)
+                stats: record.stats || {},
+                lastUpdated: record.lastUpdated
             });
         } else {
-            // New player
             const defaults = races.getRaceDefaults(data.race);
             const nights = 1;
-            
             res.json({
                 status: "NEW",
-                defaults: defaults,
+                displayName: "New Soul",
+                uuid: data.key,
                 currentNights: nights,
                 ageName: ages.getAgeName(nights),
+                ageBlurb: ages.getBlurb(nights),
+                resource: defaults.resource || 10.0,
                 maxAspect: ages.getMaxAspect(nights),
-                dailyToll: ages.getDailyToll(nights),
-                blurb: ages.getBlurb(nights)
+                dailyToll: ages.getDailyToll(nights)
             });
         }
     } 
     else if (data.action === "feed") {
+        // your existing feed code
         const nights = parseInt(data.currentNights) || 1;
         const currentResource = parseFloat(data.resource) || 0;
         const amount = parseFloat(data.amount) || 0;
-        
         const newResource = mechanics.processFeeding(data.race, currentResource, amount, nights);
         
         res.json({
